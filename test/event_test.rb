@@ -18,6 +18,7 @@ class EventTest < Minitest::Test
     @item2 = Item.new({name: 'Apple Pie (Slice)', price: '$2.50'})
     @item3 = Item.new({name: "Peach-Raspberry Nice Cream", price: "$5.30"})
     @item4 = Item.new({name: "Banana Nice Cream", price: "$4.25"})
+    @item5 = Item.new({name: 'Onion Pie', price: '$25.00'})
 
     @food_truck1.stock(@item1, 35)
     @food_truck1.stock(@item2, 7)
@@ -112,6 +113,15 @@ end
   def test_it_can_return_date
     @event.stubs(:date).returns("24/02/2020")
     assert_equal "24/02/2020", @event.date
-    # assert_equal "15/04/2020", @event.date
+    # today returns => assert_equal "15/04/2020", @event.date
+  end
+
+  def test_it_can_sell_items
+    @event.add_food_truck(@food_truck1)
+    @event.add_food_truck(@food_truck2)
+    @event.add_food_truck(@food_truck3)
+    assert_equal false, @event.sell(@item1, 200)
+    assert_equal true, @event.sell(@item4, 5)
+    # assert_equal 45, @food_truck2.check_stock(@item4)
   end
 end

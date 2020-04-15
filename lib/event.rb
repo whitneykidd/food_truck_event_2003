@@ -55,18 +55,11 @@ class Event
 
   def sell(item, quantity)
     if total_inventory[item][:quantity] >= quantity
-      # require "pry"; binding.pry
       return true
-      reduce_stock(item, quantity)
-      # true
+      total_inventory[item][:quantity] -= quantity
+      total_inventory
     else
       false
     end
-  end
-
-  def reduce_stock(item, quantity)
-    total_inventory[item][:quantity] -= quantity
-    # require "pry"; binding.pry
-    total_inventory
   end
 end
