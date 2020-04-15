@@ -47,4 +47,11 @@ end
     food_truck_names = ["Rocky Mountain Pies", "Ba-Nom-a-Nom", "Palisade Peach Shack"]
     assert_equal food_truck_names, @event.food_truck_names
   end
+
+  def test_it_can_return_food_trucks_that_sell_item
+    @event.add_food_truck(@food_truck1)
+    @event.add_food_truck(@food_truck2)
+    @event.add_food_truck(@food_truck3)
+    assert_equal [@food_truck1, @food_truck3], @event.food_trucks_that_sell(@item1)
+  end
 end
