@@ -1,5 +1,7 @@
+require 'date'
 require 'minitest/autorun'
 require 'minitest/pride'
+require 'mocha/minitest'
 require './lib/item'
 require './lib/food_truck'
 require './lib/event'
@@ -105,5 +107,11 @@ end
     @event.add_food_truck(@food_truck3)
     sorted_list = ["Apple Pie (Slice)", "Banana Nice Cream", "Peach Pie (Slice)", "Peach-Raspberry Nice Cream"]
     assert_equal sorted_list, @event.sorted_item_list
+  end
+
+  def test_it_can_return_date
+    @event.stubs(:date).returns("24/02/2020")
+    assert_equal "24/02/2020", @event.date
+    # assert_equal "15/04/2020", @event.date
   end
 end
