@@ -42,7 +42,7 @@ class Event
 
   def overstocked_items
     overstocked_items = total_inventory.find_all do |items|
-      items.last[:quantity] > 50
+      items.last[:quantity] > 50 && items.last[:food_trucks].length > 1
     end
     overstocked_items.map { | items | items.first }
   end
@@ -51,5 +51,22 @@ class Event
     total_inventory.map do |items|
       items.first.name
     end.sort
+  end
+
+  def sell(item, quantity)
+    if total_inventory[item][:quantity] >= quantity
+      # require "pry"; binding.pry
+      return true
+      reduce_stock(item, quantity)
+      # true
+    else
+      false
+    end
+  end
+
+  def reduce_stock(item, quantity)
+    total_inventory[item][:quantity] -= quantity
+    # require "pry"; binding.pry
+    total_inventory
   end
 end
