@@ -98,4 +98,12 @@ end
     @event.add_food_truck(@food_truck3)
     assert_equal [@item1], @event.overstocked_items
   end
+
+  def test_it_can_return_sorted_item_list
+    @event.add_food_truck(@food_truck1)
+    @event.add_food_truck(@food_truck2)
+    @event.add_food_truck(@food_truck3)
+    sorted_list = ["Apple Pie (Slice)", "Banana Nice Cream", "Peach Pie (Slice)", "Peach-Raspberry Nice Cream"]
+    assert_equal sorted_list, @event.sorted_item_list
+  end
 end

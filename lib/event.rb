@@ -40,4 +40,10 @@ class Event
     end
     overstocked_items.map { | items | items.first }
   end
+
+  def sorted_item_list
+    total_inventory.map do |items|
+      items.first.name
+    end.sort
+  end
 end
