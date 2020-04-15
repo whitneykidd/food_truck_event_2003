@@ -71,25 +71,31 @@ end
     @event.add_food_truck(@food_truck3)
     @food_truck3.stock(@item3, 10)
     total_inventory = {
-    @item1 => {
-      quantity: 100,
-      food_trucks: [@food_truck1, @food_truck3]
-    },
-    @item2 => {
-      quantity: 7,
-      food_trucks: [@food_truck1]
-    },
-    @item3 => {
-      quantity: 35,
-      food_trucks: [@food_truck2, @food_truck3]
-    },
-    @item4 =>
-    {
-      quantity: 50,
-      food_trucks: [@food_truck2]
-    },
-  }
-
+                  @item1 => {
+                    quantity: 100,
+                    food_trucks: [@food_truck1, @food_truck3]
+                  },
+                  @item2 => {
+                    quantity: 7,
+                    food_trucks: [@food_truck1]
+                  },
+                  @item3 => {
+                    quantity: 35,
+                    food_trucks: [@food_truck2, @food_truck3]
+                  },
+                  @item4 =>
+                  {
+                    quantity: 50,
+                    food_trucks: [@food_truck2]
+                  },
+                }
   assert_equal total_inventory, @event.total_inventory
+  end
+
+  def test_it_can_return_overstocked_items
+    @event.add_food_truck(@food_truck1)
+    @event.add_food_truck(@food_truck2)
+    @event.add_food_truck(@food_truck3)
+    assert_equal [@item1], @event.overstocked_items
   end
 end

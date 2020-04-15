@@ -33,4 +33,11 @@ class Event
       inventory
     end
   end
+
+  def overstocked_items
+    overstocked_items = total_inventory.find_all do |items|
+      items.last[:quantity] > 50
+    end
+    overstocked_items.map { | items | items.first }
+  end
 end
